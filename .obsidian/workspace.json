@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-AgentBase/behavior/01-如何编写Skill.md",
+                "file": "00-AgentBase/runtime/01-Agent运行时与CLI.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "01-如何编写Skill"
+              "title": "01-Agent运行时与CLI"
             }
           }
         ]
@@ -186,6 +186,7 @@
   "active": "d3647fc4b928981d",
   "lastOpenFiles": [
     "00-AgentBase/00-目录索引.md",
+    "00-AgentBase/behavior/01-如何编写Skill.md",
     "00-AgentBase/AGENTS.md",
     "00-AgentBase/README-rename-notice.md",
     "01-Skills/ui-ux-pro-max/SKILL.md",
@@ -229,7 +230,6 @@
     "01-Skills/context-engineering/SKILL.md",
     "01-Skills/baoyu-skills/SKILL.md",
     "01-Skills/anthropics-skills/SKILL.md",
-    "01-Skills/anthropics-skills/THIRD_PARTY_NOTICES.md",
-    "01-Skills/agents-md-author/SKILL.md"
+    "01-Skills/anthropics-skills/THIRD_PARTY_NOTICES.md"
   ]
 }
