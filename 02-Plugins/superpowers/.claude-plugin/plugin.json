@@ -1,0 +1,11 @@
+﻿{
+  "name": "superpowers",
+  "version": "6.0.2",
+  "description": "Cross-runtime software development methodology (brainstorming, TDD, debugging, code review, plans, subagents). Adapter for kb-managed canonical source. See 01-Skills/superpowers/SKILL.md for full details.",
+  "author": {
+    "name": "Jesse Vincent (canonical) / kb-managed (adapter)"
+  },
+  "license": "MIT",
+  "keywords": ["development", "tdd", "debugging", "brainstorming", "code-review", "plans"],
+  "skills": "../../01-Skills/superpowers/skills/"
+}

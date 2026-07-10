@@ -1,0 +1,11 @@
+﻿{
+  "name": "ui-ux-pro-max",
+  "version": "2.6.2",
+  "description": "UI/UX design intelligence. Adapter for kb-managed canonical source. See 01-Skills/ui-ux-pro-max/SKILL.md for full details.",
+  "author": {
+    "name": "nextlevelbuilder (canonical) / kb-managed (adapter)"
+  },
+  "license": "MIT",
+  "keywords": ["ui", "ux", "design", "styles", "typography", "color-palette", "accessibility", "charts", "components"],
+  "skills": "../../01-Skills/ui-ux-pro-max/skills/"
+}

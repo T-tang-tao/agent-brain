@@ -1,0 +1,234 @@
+{
+  "main": {
+    "id": "f99d0e9e12e2b484",
+    "type": "split",
+    "children": [
+      {
+        "id": "1267efa85aa436e2",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "d3647fc4b928981d",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "00-AgentBase/behavior/04-记忆机制(Memory).md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "04-记忆机制(Memory)"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f58a8059b9ddcdb6",
+    "type": "split",
+    "children": [
+      {
+        "id": "a2500e95441dca01",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "14645780c93d472e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "51f5247e65a4a27c",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "c338b4c2919d6fbb",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8e4768cee6957ede",
+    "type": "split",
+    "children": [
+      {
+        "id": "b33d5a27618cf7ad",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "5ed6dd99a4a3cd97",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "01-Skills/kb-init/SKILL.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "SKILL 的反向链接列表"
+            }
+          },
+          {
+            "id": "c5f17bdeae6aa65f",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "01-Skills/kb-init/SKILL.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "SKILL 的出链列表"
+            }
+          },
+          {
+            "id": "ffa91a4393d4c16b",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "bc0dfc60e6a1242b",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "dd6a28231c8cbba0",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "01-Skills/kb-init/SKILL.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "SKILL 的大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "14645780c93d472e",
+  "lastOpenFiles": [
+    "tmp/pdfs/page-11.png",
+    "tmp/pdfs/page-10.png",
+    "tmp/pdfs/page-09.png",
+    "tmp/pdfs/page-08.png",
+    "tmp/pdfs/page-07.png",
+    "tmp/pdfs/page-06.png",
+    "tmp/pdfs/page-05.png",
+    "tmp/pdfs/page-04.png",
+    "tmp/pdfs/page-03.png",
+    "tmp/pdfs/fix2.py",
+    "tmp/pdfs/inspect.py",
+    "tmp/pdfs/fix1.py",
+    "tmp/pdfs/fix_marker.txt",
+    "tmp/pdfs/page-12.png",
+    "output/pdf/AI学习·使用·时间管理-新手入门指南.pdf",
+    "tmp/pdfs/build_pdf.py",
+    "tmp/pdfs",
+    "tmp",
+    "output/pdf",
+    "output",
+    "00-AgentBase/behavior/15-Hosted-Agents.md",
+    "00-AgentBase/behavior/14-LLM-Project-Development.md",
+    "00-AgentBase/behavior/13-Harness-Engineering.md",
+    "00-AgentBase/behavior/12-Tool-Design.md",
+    "00-AgentBase/behavior/11-Multi-Agent-Patterns.md",
+    "00-AgentBase/behavior/10-Filesystem-Context.md",
+    "00-AgentBase/behavior/09-Context-Engineering.md",
+    "00-AgentBase/behavior/05-评估方法(Evaluation).md",
+    "00-AgentBase/behavior/06-可观测性(Observability).md",
+    "01-Skills/development-agent/SKILL.md",
+    "01-Skills/context-engineering/SKILL.md",
+    "01-Skills/baoyu-skills/SKILL.md",
+    "01-Skills/anthropics-skills/SKILL.md",
+    "01-Skills/anthropics-skills/THIRD_PARTY_NOTICES.md",
+    "01-Skills/agents-md-author/SKILL.md",
+    "99-Roadmap.md",
+    "AGENTS.md",
+    "README.md",
+    "01-Skills/superpowers/SKILL.md",
+    "01-Skills/kimi-webbridge/SKILL.md",
+    "01-Skills/kepano-obsidian-skills/skills/obsidian-cli/SKILL.md",
+    "01-Skills/README.md",
+    "01-Skills/AGENTS.md",
+    "01-Skills/baoyu-skills/skills/baoyu-cover-image/SKILL.md",
+    "01-Skills/baoyu-skills/skills/baoyu-slide-deck/references/styles/intuition-machine.md"
+  ]
+}

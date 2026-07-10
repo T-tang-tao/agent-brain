@@ -1,0 +1,63 @@
+# 仓库级 .gitignore
+
+# === Agent 运行时产物 ===
+# 不入库:从资产层 / 外部资源生成
+.agent/cache/
+.agent/memory/.session/
+.agent/mcp/*-local.json
+
+# 入库(团队共享):.agent/skills/ .agent/agents/ .agent/prompts/ .agent/hooks/
+
+# === 编辑器 / IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === 操作系统 ===
+# Windows
+$RECYCLE.BIN/
+*.lnk
+# macOS
+._*
+.Spotlight-V100
+.Trashes
+
+# === PowerShell / Node / Python ===
+*.tmp
+*.bak
+*.log
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# === Obsidian(本仓库使用 Obsidian 做笔记)===
+.obsidian/workspace
+.obsidian/cache/
+.trash/
+.obsidian/plugins/*/data.json
+
+# === 上传 / 临时 ===
+.uploads/
+!uploads/.gitkeep
+
+# === 第三方 Skill 内部 ===
+# anthropics-skills / baoyu-skills / kepano-obsidian-skills / superpowers / ui-ux-pro-max
+# 这几个是离线镜像,内部 .git 目录可能存在,不入库
+01-Skills/*/.git/
+01-Skills/*/.githooks/
+01-Skills/*/node_modules/
+
+# === 敏感信息(防御性)===
+*.pem
+*.key
+*.secret
+.env
+.env.local
+config.local.*
