@@ -299,12 +299,12 @@ Schema(约束层)         →   本文件(管理员规范=入库标准+管理流
 
 | 知识库模块 | 实践层目录 | 关联方式 |
 |------------|-----------|----------|
-| behavior → Skill 概念 | `../01-Skills/` | 知识库解释"Skill 是什么",实践层提供"怎么定义一个 Skill" |
-| tools → Plugin 概念 | `../02-Plugins/` | 知识库解释"Plugin 是什么",实践层提供"怎么装、怎么配" |
-| behavior → Prompt 概念 | `../03-Prompts/` | 知识库解释"Prompt 的作用",实践层提供"经过验证的模板" |
-| tools → MCP 概念 | `../04-MCP/` | 知识库解释"MCP 协议",实践层提供"server 配置示例" |
-| safety → Boundary 概念 | `../05-Boundaries/` | 知识库解释"为什么需要边界",实践层提供"具体边界规则" |
-| runtime → Migration 概念 | `../06-Migration/` | 知识库解释"迁移的本质",实践层提供"迁移步骤" |
+| behavior → Skill 概念 | [`01-Skills/`](../01-Skills/) | 知识库解释"Skill 是什么",实践层提供"怎么定义一个 Skill" |
+| tools → Plugin 概念 | [`02-Plugins/`](../02-Plugins/) | 知识库解释"Plugin 是什么",实践层提供"怎么装、怎么配" |
+| behavior → Prompt 概念 | [`03-Prompts/`](../03-Prompts/) | 知识库解释"Prompt 的作用",实践层提供"经过验证的模板" |
+| tools → MCP 概念 | [`04-MCP/`](../04-MCP/) | 知识库解释"MCP 协议",实践层提供"server 配置示例" |
+| safety → Boundary 概念 | [`05-Boundaries/`](../05-Boundaries/) | 知识库解释"为什么需要边界",实践层提供"具体边界规则" |
+| runtime → Migration 概念 | [`06-Migration/`](../06-Migration/) | 知识库解释"迁移的本质",实践层提供"迁移步骤" |
 
 **引用规则**:
 - 知识库文档提及实践层概念时 → 链接到对应目录,一句话带过,不展开

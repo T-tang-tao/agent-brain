@@ -80,12 +80,12 @@
 
 | 资产类型 | 去哪里找 |
 |----------|----------|
-| Skill 文件 | `../01-Skills/` |
-| Plugin 配置 | `../02-Plugins/` |
-| Prompt 模板 | `../03-Prompts/` |
-| MCP 配置 | `../04-MCP/` |
-| 边界规则 | `../05-Boundaries/` |
-| 迁移 playbook | `../06-Migration/` |
+| Skill 文件 | [`01-Skills/`](../01-Skills/) |
+| Plugin 配置 | [`02-Plugins/`](../02-Plugins/) |
+| Prompt 模板 | [`03-Prompts/`](../03-Prompts/) |
+| MCP 配置 | [`04-MCP/`](../04-MCP/) |
+| 边界规则 | [`05-Boundaries/`](../05-Boundaries/) |
+| 迁移 playbook | [`06-Migration/`](../06-Migration/) |
 
 ## 相关文件
 
