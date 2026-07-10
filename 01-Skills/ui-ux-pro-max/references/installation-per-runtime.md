@@ -1,4 +1,4 @@
-﻿# UI/UX Pro Max - 跨 Runtime 安装指南
+# UI/UX Pro Max - 跨 Runtime 安装指南
 
 本技能源仓库是一个 Claude Plugin(`nextlevelbuilder/ui-ux-pro-max-skill`),在不同 Runtime 下的部署方式各不相同。
 

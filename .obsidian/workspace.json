@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "00-AgentBase/behavior/04-记忆机制(Memory).md",
+                "file": "00-AgentBase/AGENTS.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "04-记忆机制(Memory)"
+              "title": "AGENTS"
             }
           }
         ]
@@ -183,8 +183,19 @@
       "bases:新建数据库": false
     }
   },
-  "active": "14645780c93d472e",
+  "active": "d3647fc4b928981d",
   "lastOpenFiles": [
+    "00-AgentBase/README-rename-notice.md",
+    "01-Skills/ui-ux-pro-max/SKILL.md",
+    "README.md",
+    "00-AgentBase/runtime/00-项目级配置.md",
+    "AGENTS.md",
+    "00-AgentBase/behavior/10-Filesystem-Context.md",
+    "00-AgentBase/00-human/01-Agent是什么-人类入门.md",
+    "00-AgentBase/behavior/02-跨Runtime技能管理.md",
+    "01-Skills/ui-ux-pro-max/references/installation-per-runtime.md",
+    "00-AgentBase/behavior/11-Multi-Agent-Patterns.md",
+    "00-AgentBase/behavior/04-记忆机制(Memory).md",
     "tmp/pdfs/page-11.png",
     "tmp/pdfs/page-10.png",
     "tmp/pdfs/page-09.png",
@@ -209,8 +220,6 @@
     "00-AgentBase/behavior/14-LLM-Project-Development.md",
     "00-AgentBase/behavior/13-Harness-Engineering.md",
     "00-AgentBase/behavior/12-Tool-Design.md",
-    "00-AgentBase/behavior/11-Multi-Agent-Patterns.md",
-    "00-AgentBase/behavior/10-Filesystem-Context.md",
     "00-AgentBase/behavior/09-Context-Engineering.md",
     "00-AgentBase/behavior/05-评估方法(Evaluation).md",
     "00-AgentBase/behavior/06-可观测性(Observability).md",
@@ -221,14 +230,6 @@
     "01-Skills/anthropics-skills/THIRD_PARTY_NOTICES.md",
     "01-Skills/agents-md-author/SKILL.md",
     "99-Roadmap.md",
-    "AGENTS.md",
-    "README.md",
-    "01-Skills/superpowers/SKILL.md",
-    "01-Skills/kimi-webbridge/SKILL.md",
-    "01-Skills/kepano-obsidian-skills/skills/obsidian-cli/SKILL.md",
-    "01-Skills/README.md",
-    "01-Skills/AGENTS.md",
-    "01-Skills/baoyu-skills/skills/baoyu-cover-image/SKILL.md",
-    "01-Skills/baoyu-skills/skills/baoyu-slide-deck/references/styles/intuition-machine.md"
+    "01-Skills/superpowers/SKILL.md"
   ]
 }

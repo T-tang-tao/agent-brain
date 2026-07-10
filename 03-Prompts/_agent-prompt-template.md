@@ -39,8 +39,8 @@
 
 可参考：
 
-- [[../00-AgentBase/safety/01-Agent边界与限制]]
-- [[../05-Boundaries/_boundary-policy-template]]
+- [../00-AgentBase/safety/01-Agent边界与限制]
+- [../05-Boundaries/_boundary-policy-template]
 
 ## 输出格式
 

@@ -1,7 +1,7 @@
 ---
 name: agents-md-author
 description: "编写 / 修改 / 优化 / 审查 AGENTS.md。触发词:改 AGENTS.md / 写 AGENTS / 重写 AGENTS / 优化 AGENTS.md / 新建 AGENTS.md / 别解释为什么 / 直接执行 / 删掉那段解释 / 不写原因。强制规则:AGENTS.md 是 context 的扩展,关键约束放最前(< 100 行达首尾注意力区)、不写"为什么"段落(放 99-Roadmap.md)、不重复知识库已有内容、用祈使句、用结构化表格、引用而非重复、边界规则覆盖三类(允许/确认/禁止)、单文件 < 500 行、关键约束不写中间(防 U 型注意力曲线)。"
-version: 2.0.0
+version: 2.1.0
 status: 可用
 level: project
 imported: 2026-07-09
@@ -25,7 +25,7 @@ updated: 2026-07-10
 3. **不重复知识库已有内容**。引用即可。
 4. **用祈使句**。规则不要用"我们认为"开头。
 5. **表格用结构化数据**,不用散文。
-6. **引用而非重复**。`[`link`](./path)` 优于内联。
+6. **引用而非重复**。`[`link`](./path)` 优于内联。**链接格式**:`[`显示文字`](相对路径.md)`。**禁止** Obsidian wikilink `[[path]]`、裸 `[path]`、绝对路径。详见 [00-AgentBase/AGENTS.md](../../00-AgentBase/AGENTS.md) § 3.1。
 7. **边界规则覆盖三类**:`✅ 允许` / `⚠️ 需确认` / `❌ 禁止`。
 8. **单文件 < 500 行**。超长拆 references/。
 9. **关键约束不写中间**。首尾是 attention sink,中间容易被丢。

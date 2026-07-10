@@ -128,7 +128,7 @@ def callout(title, body, accent=ACCENT):
         Paragraph(f'<b>{title}</b>', ParagraphStyle("cH", fontName="SansSC-Bold", fontSize=10.5, leading=14, textColor=accent)),
         Paragraph(body, BODY),
     ]
-    t = Table([[inner]], colWidths=[CONTENT_W])
+    t = Table([inner], colWidths=[CONTENT_W])
     t.setStyle(TableStyle([
         ("BACKGROUND", (0,0), (-1,-1), BG_SOFT),
         ("LEFTPADDING", (0,0), (-1,-1), 10),
@@ -144,7 +144,7 @@ def bullet_list(items):
     return [Paragraph(f"· {it}", BODY) for it in items]
 
 def checklist_table(rows):
-    data = [[Paragraph("<font color='#94A3B8'>☐</font>",
+    data = [Paragraph("<font color='#94A3B8'>☐</font>",
                        ParagraphStyle("cb", fontName="SansSC-Bold", fontSize=13, leading=18, textColor=colors.HexColor("#94A3B8"))),
              Paragraph(t, BODY)] for t in rows]
     t = Table(data, colWidths=[9*mm, CONTENT_W - 9*mm])
@@ -161,7 +161,7 @@ def checklist_table(rows):
 def two_col(left, right):
     w = CONTENT_W
     col0 = w / 2 - 4*mm; col1 = w / 2 - 4*mm
-    t = Table([[left, right]], colWidths=[col0, col1])
+    t = Table([left, right], colWidths=[col0, col1])
     t.setStyle(TableStyle([
         ("VALIGN", (0,0), (-1,-1), "TOP"),
         ("LEFTPADDING", (0,0), (-1,-1), 0),
@@ -359,7 +359,7 @@ rhythm = [
     ["第 3 周 每天 30 min", "接入 1 个 Plugin 或 MCP", "工具箱扩展 +1"],
     ["第 4 周 每天 30 min", "搭一个自动化脚本(见第 4 章)", "每天省 30 min 时间"],
 ]
-rh_rows = [[para_cell(c) for c in row] for row in rhythm]
+rh_rows = [para_cell(c) for c in row] for row in rhythm]
 rh_tbl = Table(rh_rows, colWidths=[42*mm, 72*mm, CONTENT_W - 42*mm - 72*mm])
 rh_tbl.setStyle(TableStyle([
     ("BACKGROUND", (0,0), (-1,0), ACCENT),
@@ -409,8 +409,8 @@ rt_data = [
     ["Codex CLI", "安全审批 / 自定义技能", "看重安全的人", "npm i -g @openai/codex"],
     ["Hermes Agent", "轻量 / 定时任务 / 网关", "想跑自动化的同学", "见 Hermes 文档"],
 ]
-rt_rows = [[para_cell(c) for c in row] for row in rt_data]
-rt_rows[0] = [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in rt_data[0]]
+rt_rows = [para_cell(c) for c in row] for row in rt_data]
+rt_rows[0] = [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in rt_data[0]
 rt_tbl = Table(rt_rows, colWidths=[30*mm, 38*mm, 32*mm, 48*mm])
 rt_tbl.setStyle(TableStyle([
     ("BACKGROUND", (0,0), (-1,0), ACCENT),
@@ -471,8 +471,8 @@ scenes = [
     ["学习陪练", "边问边学 / 模拟面试 / 解释概念", "20 min/次", "★"],
     ["定时任务", "每天 9 点生成日报", "持续省时", "★★★"],
 ]
-sc_rows = [[para_cell(c) for c in row] for row in scenes]
-sc_rows[0] = [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in scenes[0]]
+sc_rows = [para_cell(c) for c in row] for row in scenes]
+sc_rows[0] = [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in scenes[0]
 sc_tbl = Table(sc_rows, colWidths=[28*mm, 60*mm, 36*mm, 24*mm])
 sc_tbl.setStyle(TableStyle([
     ("BACKGROUND", (0,0), (-1,0), ACCENT),
@@ -506,8 +506,8 @@ daily = [
     ["17:30", "下班前 → 让 AI 起草明日清单 + 邮件草稿", "写作 skill", "15 min"],
     ["周五 17:00", "生成本周周报 + 下周计划", "周报模板", "30 min"],
 ]
-d_rows = [[para_cell(c) for c in row] for row in daily]
-d_rows[0] = [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in daily[0]]
+d_rows = [para_cell(c) for c in row] for row in daily]
+d_rows[0] = [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in daily[0]
 d_tbl = Table(d_rows, colWidths=[28*mm, 60*mm, 38*mm, 22*mm])
 d_tbl.setStyle(TableStyle([
     ("BACKGROUND", (0,0), (-1,0), ACCENT_3),
@@ -568,7 +568,7 @@ days = [
     ("Day 7 · 复盘", "写一篇周记:这周让 AI 做了什么、效果、下周计划", "完成第一轮闭环"),
 ]
 day_data_rows = [
-    [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in ["日期", "任务", "通过标准"]]
+    [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in ["日期", "任务", "通过标准"]
 ]
 for d, t, ok in days:
     day_data_rows.append([
@@ -643,8 +643,8 @@ res = [
     ["迁移 Playbook", "06-Migration/"],
     ["路线图", "99-Roadmap.md"],
 ]
-r_rows = [[para_cell(c) for c in row] for row in res]
-r_rows[0] = [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in res[0]]
+r_rows = [para_cell(c) for c in row] for row in res]
+r_rows[0] = [para_cell(c, ParagraphStyle("h", fontName="SansSC-Bold", fontSize=10, textColor=colors.white, leading=14)) for c in res[0]
 for i in range(1, len(r_rows)):
     r_rows[i][1] = para_cell(f'<font color="{ACCENT.hexval()}">{res[i][1]}</font>')
 res_block = Table(r_rows, colWidths=[45*mm, CONTENT_W - 45*mm])

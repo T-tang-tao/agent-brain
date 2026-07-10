@@ -8,7 +8,7 @@
 
 SESSION_DIR="$1"
 
-if [[ -z "$SESSION_DIR" ]]; then
+if [ -z "$SESSION_DIR" ]; then
   echo '{"error": "Usage: stop-server.sh <session_dir>"}'
   exit 1
 fi
@@ -24,16 +24,16 @@ mark_stopped() {
 }
 
 read_expected_server_id() {
-  [[ -f "$SERVER_ID_FILE" ]] || return 1
+  [ -f "$SERVER_ID_FILE" ] || return 1
   local id
   id="$(tr -d '\r\n' < "$SERVER_ID_FILE" 2>/dev/null || true)"
-  [[ "$id" =~ ^[A-Za-z0-9_-]{32,64}$ ]] || return 1
+  [ "$id" =~ ^[A-Za-z0-9_-]{32,64}$ ] || return 1
   printf '%s\n' "$id"
 }
 
 command_line_for_pid() {
   local pid="$1"
-  if [[ -r "/proc/$pid/cmdline" ]]; then
+  if [ -r "/proc/$pid/cmdline" ]; then
     tr '\0' '\n' < "/proc/$pid/cmdline" 2>/dev/null || true
     return 0
   fi
@@ -44,16 +44,16 @@ command_has_server_id() {
   local pid="$1"
   local expected="$2"
   local expected_arg="--brainstorm-server-id=$expected"
-  if [[ -r "/proc/$pid/cmdline" ]]; then
+  if [ -r "/proc/$pid/cmdline" ]; then
     local arg
-    while IFS= read -r -d '' arg || [[ -n "$arg" ]]; do
-      [[ "$arg" == "$expected_arg" ]] && return 0
+    while IFS= read -r -d '' arg || [ -n "$arg" ]; do
+      [ "$arg" == "$expected_arg" ] && return 0
     done < "/proc/$pid/cmdline"
     return 1
   fi
   local command_line
   command_line="$(command_line_for_pid "$pid")"
-  [[ -n "$command_line" ]] || return 1
+  [ -n "$command_line" ] || return 1
   case " $command_line " in
     *" $expected_arg "*) return 0 ;;
     *) return 1 ;;
@@ -70,7 +70,7 @@ is_brainstorm_server() {
   return 0
 }
 
-if [[ -f "$PID_FILE" ]]; then
+if [ -f "$PID_FILE" ]; then
   pid=$(cat "$PID_FILE")
 
   # Refuse to signal a PID we can't prove is our server. A stale pid file may
@@ -110,7 +110,7 @@ if [[ -f "$PID_FILE" ]]; then
   mark_stopped "stop-server.sh"
 
   # Only delete ephemeral /tmp directories
-  if [[ "$SESSION_DIR" == /tmp/* ]]; then
+  if [ "$SESSION_DIR" == /tmp/* ]; then
     rm -rf "$SESSION_DIR"
   fi
 

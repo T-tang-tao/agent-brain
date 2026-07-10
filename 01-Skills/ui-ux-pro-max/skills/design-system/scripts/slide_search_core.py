@@ -223,7 +223,7 @@ def _load_decision_csv(csv_type):
         return {}
 
     data = _load_csv(filepath)
-    return {row[config["key_col"]]: row for row in data if config["key_col"] in row}
+    return {row[config["key_col"]: row for row in data if config["key_col"] in row}
 
 
 def get_layout_for_goal(goal, previous_emotion=None):

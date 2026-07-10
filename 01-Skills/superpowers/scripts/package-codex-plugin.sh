@@ -50,15 +50,15 @@ die() {
   exit 1
 }
 
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
   case "$1" in
     --output)
-      [[ $# -ge 2 ]] || die "--output requires a path"
+      [ $# -ge 2 ] || die "--output requires a path"
       OUTPUT="$2"
       shift 2
       ;;
     --format)
-      [[ $# -ge 2 ]] || die "--format requires a value"
+      [ $# -ge 2 ] || die "--format requires a value"
       case "$2" in
         zip)
           FORMAT="zip"
@@ -73,12 +73,12 @@ while [[ $# -gt 0 ]]; do
       shift 2
       ;;
     --metadata-source)
-      [[ $# -ge 2 ]] || die "--metadata-source requires a path"
+      [ $# -ge 2 ] || die "--metadata-source requires a path"
       METADATA_SOURCE="$2"
       shift 2
       ;;
     --ref)
-      [[ $# -ge 2 ]] || die "--ref requires a value"
+      [ $# -ge 2 ] || die "--ref requires a value"
       REF="$2"
       shift 2
       ;;
@@ -118,14 +118,14 @@ infer_format_from_output() {
   esac
 }
 
-if [[ -z "$FORMAT" ]]; then
+if [ -z "$FORMAT" ]; then
   FORMAT="$(infer_format_from_output "$OUTPUT" || true)"
-  if [[ -z "$FORMAT" ]]; then
+  if [ -z "$FORMAT" ]; then
     FORMAT="zip"
   fi
 else
   output_format="$(infer_format_from_output "$OUTPUT" || true)"
-  if [[ -n "$output_format" && "$output_format" != "$FORMAT" ]]; then
+  if [ -n "$output_format" && "$output_format" != "$FORMAT" ]; then
     die "--output extension does not match --format $FORMAT: $OUTPUT"
   fi
 fi
@@ -135,30 +135,30 @@ command -v jq >/dev/null || die "jq not found in PATH"
 command -v tar >/dev/null || die "tar not found in PATH"
 command -v gzip >/dev/null || die "gzip not found in PATH"
 command -v shasum >/dev/null || die "shasum not found in PATH"
-if [[ "$FORMAT" == "zip" ]]; then
+if [ "$FORMAT" == "zip" ]; then
   command -v zip >/dev/null || die "zip not found in PATH"
   command -v unzip >/dev/null || die "unzip not found in PATH"
 fi
 
-[[ -d "$REPO_ROOT/.git" ]] || die "repo root is not a git checkout: $REPO_ROOT"
+[ -d "$REPO_ROOT/.git" ] || die "repo root is not a git checkout: $REPO_ROOT"
 git -C "$REPO_ROOT" rev-parse --verify "$REF^{commit}" >/dev/null ||
   die "git ref does not resolve to a commit: $REF"
 
-if [[ "$ALLOW_DIRTY" -ne 1 ]]; then
+if [ "$ALLOW_DIRTY" -ne 1 ]; then
   dirty_status="$(git -C "$REPO_ROOT" status --porcelain --untracked-files=all)"
-  if [[ -n "$dirty_status" ]]; then
+  if [ -n "$dirty_status" ]; then
     echo "Working tree has uncommitted changes:" >&2
     printf '%s\n' "$dirty_status" | sed 's/^/  /' >&2
     die "commit or stash changes first, or pass --allow-dirty to package $REF anyway"
   fi
 fi
 
-if [[ -z "$METADATA_SOURCE" ]]; then
-  if [[ -d "$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers" ]]; then
+if [ -z "$METADATA_SOURCE" ]; then
+  if [ -d "$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers" ]; then
     METADATA_SOURCE="$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers"
-  elif [[ -f "$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers.zip" ]]; then
+  elif [ -f "$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers.zip" ]; then
     METADATA_SOURCE="$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers.zip"
-  elif [[ -f "$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers.tar.gz" ]]; then
+  elif [ -f "$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers.tar.gz" ]; then
     METADATA_SOURCE="$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers.tar.gz"
   else
     die "no metadata source found; pass --metadata-source <prior package dir, zip, or tar.gz>"
@@ -171,7 +171,7 @@ METADATA_WORK="$WORK_DIR/metadata"
 ARCHIVE_LIST="$WORK_DIR/archive-list"
 
 cleanup() {
-  if [[ "$KEEP_STAGE" -eq 1 ]]; then
+  if [ "$KEEP_STAGE" -eq 1 ]; then
     echo "Keeping staging directory: $WORK_DIR" >&2
   else
     rm -rf "$WORK_DIR"
@@ -185,13 +185,13 @@ metadata_root_from_dir() {
   local candidate="$1"
   local nested
 
-  if [[ -d "$candidate/skills" ]]; then
+  if [ -d "$candidate/skills" ]; then
     printf '%s\n' "$candidate"
     return 0
   fi
 
   nested="$(find "$candidate" -mindepth 2 -maxdepth 2 -type d -name skills -print -quit)"
-  if [[ -n "$nested" ]]; then
+  if [ -n "$nested" ]; then
     dirname "$nested"
     return 0
   fi
@@ -203,9 +203,9 @@ prepare_metadata_root() {
   local source="$1"
   local root
 
-  if [[ -d "$source" ]]; then
+  if [ -d "$source" ]; then
     root="$(cd "$source" && pwd)"
-  elif [[ -f "$source" ]]; then
+  elif [ -f "$source" ]; then
     case "$source" in
       *.tar.gz|*.tgz)
         tar -xzf "$source" -C "$METADATA_WORK"
@@ -240,9 +240,9 @@ git -C "$REPO_ROOT" archive --format=tar "$REF" -- \
   | tar -xf - -C "$STAGE"
 
 VERSION="$(jq -r '.version // empty' "$STAGE/.codex-plugin/plugin.json")"
-[[ -n "$VERSION" ]] || die "could not read version from .codex-plugin/plugin.json"
+[ -n "$VERSION" ] || die "could not read version from .codex-plugin/plugin.json"
 
-if [[ -z "$OUTPUT" ]]; then
+if [ -z "$OUTPUT" ]; then
   case "$FORMAT" in
     zip)
       OUTPUT="$REPO_ROOT/../_tmp/sup-codex-packaging/superpowers-$VERSION.zip"
@@ -260,7 +260,7 @@ while IFS= read -r skill_dir; do
   skill_name="${skill_dir##*/}"
   metadata_file="$METADATA_ROOT/skills/$skill_name/agents/openai.yaml"
 
-  if [[ ! -f "$metadata_file" ]]; then
+  if [ ! -f "$metadata_file" ]; then
     echo "Missing OpenAI agent metadata for skill: $skill_name" >&2
     missing_metadata=1
     continue
@@ -270,13 +270,13 @@ while IFS= read -r skill_dir; do
   cp "$metadata_file" "$skill_dir/agents/openai.yaml"
 done < <(find "$STAGE/skills" -mindepth 1 -maxdepth 1 -type d -print | sort)
 
-if [[ "$missing_metadata" -ne 0 ]]; then
+if [ "$missing_metadata" -ne 0 ]; then
   die "metadata source is incomplete"
 fi
 
 skill_count="$(find "$STAGE/skills" -mindepth 1 -maxdepth 1 -type d | wc -l | tr -d ' ')"
 metadata_count="$(find "$STAGE/skills" -path '*/agents/openai.yaml' -type f | wc -l | tr -d ' ')"
-[[ "$skill_count" == "$metadata_count" ]] ||
+[ "$skill_count" == "$metadata_count" ] ||
   die "metadata count mismatch: $metadata_count metadata files for $skill_count skills"
 
 (
@@ -326,7 +326,7 @@ unexpected_paths="$(
   printf '%s\n' "$archive_paths" |
     grep -E '(^superpowers/|^\.agents/|^hooks/|package\.json$|^\.git|^\.pytest_cache|^\.ruff_cache|^scripts/|^tests/|^docs/|^evals/|^lib/|^\.claude|^\.cursor|^\.kimi|^\.opencode|^\.pi|^AGENTS\.md$|^CLAUDE\.md$|^GEMINI\.md$|^RELEASE-NOTES\.md$|^CHANGELOG\.md$)' || true
 )"
-if [[ -n "$unexpected_paths" ]]; then
+if [ -n "$unexpected_paths" ]; then
   printf '%s\n' "$unexpected_paths" | sed 's/^/  /' >&2
   die "archive contains source-only paths"
 fi

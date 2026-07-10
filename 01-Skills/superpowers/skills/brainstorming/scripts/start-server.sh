@@ -26,7 +26,7 @@ FORCE_BACKGROUND="false"
 BIND_HOST="127.0.0.1"
 URL_HOST=""
 IDLE_TIMEOUT_MINUTES=""
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
   case "$1" in
     --project-dir)
       PROJECT_DIR="$2"
@@ -63,16 +63,16 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
-if [[ -z "$URL_HOST" ]]; then
-  if [[ "$BIND_HOST" == "127.0.0.1" || "$BIND_HOST" == "localhost" ]]; then
+if [ -z "$URL_HOST" ]; then
+  if [ "$BIND_HOST" == "127.0.0.1" || "$BIND_HOST" == "localhost" ]; then
     URL_HOST="localhost"
   else
     URL_HOST="$BIND_HOST"
   fi
 fi
 
-if [[ -n "$IDLE_TIMEOUT_MINUTES" ]]; then
-  if ! [[ "$IDLE_TIMEOUT_MINUTES" =~ ^[0-9]+$ ]] || [[ "$IDLE_TIMEOUT_MINUTES" -lt 1 ]]; then
+if [ -n "$IDLE_TIMEOUT_MINUTES" ]; then
+  if ! [ "$IDLE_TIMEOUT_MINUTES" =~ ^[0-9]+$ ] || [ "$IDLE_TIMEOUT_MINUTES" -lt 1 ]; then
     echo "{\"error\": \"--idle-timeout-minutes must be a positive integer\"}"
     exit 1
   fi
@@ -83,7 +83,7 @@ is_windows_like_shell() {
   case "${OSTYPE:-}" in
     msys*|cygwin*|mingw*) return 0 ;;
   esac
-  if [[ -n "${MSYSTEM:-}" ]]; then
+  if [ -n "${MSYSTEM:-}" ]; then
     return 0
   fi
   local uname_s
@@ -95,12 +95,12 @@ is_windows_like_shell() {
 }
 
 # Some environments reap detached/background processes. Auto-foreground when detected.
-if [[ -n "${CODEX_CI:-}" && "$FOREGROUND" != "true" && "$FORCE_BACKGROUND" != "true" ]]; then
+if [ -n "${CODEX_CI:-}" && "$FOREGROUND" != "true" && "$FORCE_BACKGROUND" != "true" ]; then
   FOREGROUND="true"
 fi
 
 # Windows/Git Bash reaps nohup background processes. Auto-foreground when detected.
-if [[ "$FOREGROUND" != "true" && "$FORCE_BACKGROUND" != "true" ]]; then
+if [ "$FOREGROUND" != "true" && "$FORCE_BACKGROUND" != "true" ]; then
   if is_windows_like_shell; then
     FOREGROUND="true"
   fi
@@ -113,7 +113,7 @@ umask 077
 # Generate unique session directory
 SESSION_ID="$$-$(date +%s)"
 
-if [[ -n "$PROJECT_DIR" ]]; then
+if [ -n "$PROJECT_DIR" ]; then
   SESSION_DIR="${PROJECT_DIR}/.superpowers/brainstorm/${SESSION_ID}"
   # Persist the bound port and key per project so a restart reuses them and an
   # already-open browser tab reconnects to the same URL with a valid cookie.
@@ -132,17 +132,17 @@ SERVER_ID_FILE="${STATE_DIR}/server-instance-id"
 mkdir -p "${SESSION_DIR}/content" "$STATE_DIR"
 
 SERVER_ID=""
-if [[ -r /dev/urandom ]]; then
+if [ -r /dev/urandom ]; then
   SERVER_ID="$(od -An -N24 -tx1 /dev/urandom 2>/dev/null | tr -d ' \n' || true)"
 fi
-if ! [[ "$SERVER_ID" =~ ^[A-Za-z0-9_-]{32,64}$ ]]; then
+if ! [ "$SERVER_ID" =~ ^[A-Za-z0-9_-]{32,64}$ ]; then
   SERVER_ID="$(printf '%08x%08x%08x%08x' "$$" "$(date +%s)" "${RANDOM:-0}" "${RANDOM:-0}")"
 fi
 printf '%s\n' "$SERVER_ID" > "$SERVER_ID_FILE"
 chmod 600 "$SERVER_ID_FILE" 2>/dev/null || true
 
 # Kill any existing server
-if [[ -f "$PID_FILE" ]]; then
+if [ -f "$PID_FILE" ]; then
   old_pid=$(cat "$PID_FILE")
   kill "$old_pid" 2>/dev/null
   rm -f "$PID_FILE"
@@ -154,7 +154,7 @@ cd "$SCRIPT_DIR" || exit 1
 # $PPID is the ephemeral shell the harness spawned to run us — it dies
 # when this script exits. The harness itself is $PPID's parent.
 OWNER_PID="$(ps -o ppid= -p "$PPID" 2>/dev/null | tr -d ' ')"
-if [[ -z "$OWNER_PID" || "$OWNER_PID" == "1" ]]; then
+if [ -z "$OWNER_PID" || "$OWNER_PID" == "1" ]; then
   OWNER_PID="$PPID"
 fi
 
@@ -167,7 +167,7 @@ if is_windows_like_shell; then
 fi
 
 # Foreground mode for environments that reap detached/background processes.
-if [[ "$FOREGROUND" == "true" ]]; then
+if [ "$FOREGROUND" == "true" ]; then
   env BRAINSTORM_DIR="$SESSION_DIR" BRAINSTORM_HOST="$BIND_HOST" BRAINSTORM_URL_HOST="$URL_HOST" BRAINSTORM_OWNER_PID="$OWNER_PID" node server.cjs "--brainstorm-server-id=$SERVER_ID" &
   SERVER_PID=$!
   echo "$SERVER_PID" > "$PID_FILE"
@@ -194,7 +194,7 @@ for _ in {1..50}; do
       fi
       sleep 0.1
     done
-    if [[ "$alive" != "true" ]]; then
+    if [ "$alive" != "true" ]; then
       echo "{\"error\": \"Server started but was killed. Retry in a persistent terminal with: $SCRIPT_DIR/start-server.sh${PROJECT_DIR:+ --project-dir $PROJECT_DIR} --host $BIND_HOST --url-host $URL_HOST --foreground\"}"
       exit 1
     fi

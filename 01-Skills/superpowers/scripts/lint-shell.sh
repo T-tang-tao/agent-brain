@@ -27,7 +27,7 @@ is_shell_file() {
   local path="$1"
   local first_line=""
 
-  [[ -f "$path" ]] || return 1
+  [ -f "$path" ] || return 1
 
   case "$path" in
     *.sh)
@@ -36,7 +36,7 @@ is_shell_file() {
   esac
 
   IFS= read -r first_line <"$path" || true
-  [[ "$first_line" =~ ^#!.*[/[:space:]](bash|dash|ksh|sh)([[:space:]]|$) ]]
+  [ "$first_line" =~ ^#!.*[/[:space:](bash|dash|ksh|sh)([:space:]|$) ]
 }
 
 ensure_git_work_tree() {
@@ -53,9 +53,9 @@ add_shell_file() {
     return 0
   fi
 
-  if [[ "${#files[@]}" -gt 0 ]]; then
+  if [ "${#files[@]}" -gt 0 ]; then
     for existing in "${files[@]}"; do
-      if [[ "$existing" == "$path" ]]; then
+      if [ "$existing" == "$path" ]; then
         return 0
       fi
     done
@@ -145,7 +145,7 @@ strict=false
 all=false
 requested_files=()
 
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
   case "$1" in
     --all)
       all=true
@@ -176,25 +176,25 @@ while [[ $# -gt 0 ]]; do
 done
 
 require_tool shellcheck
-if [[ "$format" == true ]]; then
+if [ "$format" == true ]; then
   require_tool shfmt
 fi
 
 files=()
-if [[ "${#requested_files[@]}" -gt 0 ]]; then
+if [ "${#requested_files[@]}" -gt 0 ]; then
   collect_requested_shell_files "${requested_files[@]}"
-elif [[ "$all" == true ]]; then
+elif [ "$all" == true ]; then
   collect_all_shell_files
 else
   collect_changed_shell_files
 fi
 
-if [[ "${#files[@]}" -eq 0 ]]; then
+if [ "${#files[@]}" -eq 0 ]; then
   echo "No shell files found."
   exit 0
 fi
 
-if [[ "$format" == true ]]; then
+if [ "$format" == true ]; then
   echo "Formatting ${#files[@]} shell files"
   shfmt_args=(-i 2 -ci -bn)
   shfmt "${shfmt_args[@]}" -w "${files[@]}"
@@ -203,7 +203,7 @@ fi
 echo "Linting ${#files[@]} shell files"
 
 shellcheck_args=(--severity=warning --external-sources --source-path=SCRIPTDIR)
-if [[ "$strict" == true ]]; then
+if [ "$strict" == true ]; then
   shellcheck_args+=("--enable=check-extra-masked-returns,check-set-e-suppressed,quote-safe-variables,deprecate-which,avoid-nullary-conditions")
 fi
 

@@ -90,12 +90,12 @@ path_has_directory_exclude() {
   local path="$1"
   local dir
 
-  if [[ ${#IGNORED_DIR_EXCLUDES[@]} -eq 0 ]]; then
+  if [ ${#IGNORED_DIR_EXCLUDES[@]} -eq 0 ]; then
     return 1
   fi
 
   for dir in "${IGNORED_DIR_EXCLUDES[@]}"; do
-    [[ "$path" == "$dir"* ]] && return 0
+    [ "$path" == "$dir"* ] && return 0
   done
 
   return 1
@@ -104,7 +104,7 @@ path_has_directory_exclude() {
 ignored_directory_has_tracked_descendants() {
   local path="$1"
 
-  [[ -n "$(git -C "$UPSTREAM" ls-files --cached -- "$path/")" ]]
+  [ -n "$(git -C "$UPSTREAM" ls-files --cached -- "$path/")" ]
 }
 
 append_git_ignored_directory_excludes() {
@@ -112,7 +112,7 @@ append_git_ignored_directory_excludes() {
   local lookup_path
 
   while IFS= read -r -d '' path; do
-    [[ "$path" == */ ]] || continue
+    [ "$path" == */ ] || continue
 
     lookup_path="${path%/}"
     if ! ignored_directory_has_tracked_descendants "$lookup_path"; then
@@ -148,7 +148,7 @@ usage() {
   exit "${1:-0}"
 }
 
-while [[ $# -gt 0 ]]; do
+while [ $# -gt 0 ]; do
   case "$1" in
     -n|--dry-run)  DRY_RUN=1; shift ;;
     -y|--yes)      YES=1; shift ;;
@@ -173,30 +173,30 @@ command -v python3 >/dev/null || die "python3 not found in PATH"
 
 gh auth status >/dev/null 2>&1 || die "gh not authenticated — run 'gh auth login'"
 
-[[ -d "$UPSTREAM/.git" ]]         || die "upstream '$UPSTREAM' is not a git checkout"
-[[ -f "$UPSTREAM/.codex-plugin/plugin.json" ]] || die "committed Codex manifest missing at $UPSTREAM/.codex-plugin/plugin.json"
+[ -d "$UPSTREAM/.git" ]         || die "upstream '$UPSTREAM' is not a git checkout"
+[ -f "$UPSTREAM/.codex-plugin/plugin.json" ] || die "committed Codex manifest missing at $UPSTREAM/.codex-plugin/plugin.json"
 
 # Read the upstream version from the committed Codex manifest.
 UPSTREAM_VERSION="$(python3 -c 'import json,sys; print(json.load(open(sys.argv[1]))["version"])' "$UPSTREAM/.codex-plugin/plugin.json")"
-[[ -n "$UPSTREAM_VERSION" ]] || die "could not read 'version' from committed Codex manifest"
+[ -n "$UPSTREAM_VERSION" ] || die "could not read 'version' from committed Codex manifest"
 
 UPSTREAM_BRANCH="$(cd "$UPSTREAM" && git branch --show-current)"
 UPSTREAM_SHA="$(cd "$UPSTREAM" && git rev-parse HEAD)"
 UPSTREAM_SHORT="$(cd "$UPSTREAM" && git rev-parse --short HEAD)"
 
 confirm() {
-  [[ $YES -eq 1 ]] && return 0
+  [ $YES -eq 1 ] && return 0
   read -rp "$1 [y/N] " ans
-  [[ "$ans" == "y" || "$ans" == "Y" ]]
+  [ "$ans" == "y" || "$ans" == "Y" ]
 }
 
-if [[ "$UPSTREAM_BRANCH" != "main" ]]; then
+if [ "$UPSTREAM_BRANCH" != "main" ]; then
   echo "WARNING: upstream is on '$UPSTREAM_BRANCH', not 'main'"
   confirm "Sync from '$UPSTREAM_BRANCH' anyway?" || exit 1
 fi
 
 UPSTREAM_STATUS="$(cd "$UPSTREAM" && git status --porcelain)"
-if [[ -n "$UPSTREAM_STATUS" ]]; then
+if [ -n "$UPSTREAM_STATUS" ]; then
   echo "WARNING: upstream has uncommitted changes:"
   echo "$UPSTREAM_STATUS" | sed 's/^/  /'
   echo "Sync will use working-tree state, not HEAD ($UPSTREAM_SHORT)."
@@ -209,15 +209,15 @@ fi
 
 CLEANUP_DIR=""
 cleanup() {
-  if [[ -n "$CLEANUP_DIR" ]]; then
+  if [ -n "$CLEANUP_DIR" ]; then
     rm -rf "$CLEANUP_DIR"
   fi
 }
 trap cleanup EXIT
 
-if [[ -n "$LOCAL_CHECKOUT" ]]; then
+if [ -n "$LOCAL_CHECKOUT" ]; then
   DEST_REPO="$(cd "$LOCAL_CHECKOUT" && pwd)"
-  [[ -d "$DEST_REPO/.git" ]] || die "--local path '$DEST_REPO' is not a git checkout"
+  [ -d "$DEST_REPO/.git" ] || die "--local path '$DEST_REPO' is not a git checkout"
 else
   echo "Cloning $FORK..."
   CLEANUP_DIR="$(mktemp -d)"
@@ -240,7 +240,7 @@ overlay_destination_paths() {
     source_path="$repo/$path"
     preview_path="$PREVIEW_REPO/$path"
 
-    if [[ -e "$source_path" ]]; then
+    if [ -e "$source_path" ]; then
       mkdir -p "$(dirname "$preview_path")"
       cp -R "$source_path" "$preview_path"
     else
@@ -265,35 +265,35 @@ copy_local_destination_overlay() {
 }
 
 local_checkout_has_uncommitted_destination_changes() {
-  [[ -n "$(git -C "$DEST_REPO" status --porcelain=1 --untracked-files=all --ignored=matching -- "$DEST_REL")" ]]
+  [ -n "$(git -C "$DEST_REPO" status --porcelain=1 --untracked-files=all --ignored=matching -- "$DEST_REL")" ]
 }
 
 prepare_preview_checkout() {
-  if [[ -n "$LOCAL_CHECKOUT" ]]; then
-    [[ -n "$CLEANUP_DIR" ]] || CLEANUP_DIR="$(mktemp -d)"
+  if [ -n "$LOCAL_CHECKOUT" ]; then
+    [ -n "$CLEANUP_DIR" ] || CLEANUP_DIR="$(mktemp -d)"
     PREVIEW_REPO="$CLEANUP_DIR/preview"
     git clone -q --no-local "$DEST_REPO" "$PREVIEW_REPO"
     PREVIEW_DEST="$PREVIEW_REPO/$DEST_REL"
   fi
 
   git -C "$PREVIEW_REPO" checkout -q "$BASE" 2>/dev/null || die "base branch '$BASE' doesn't exist in $FORK"
-  if [[ -n "$LOCAL_CHECKOUT" ]]; then
+  if [ -n "$LOCAL_CHECKOUT" ]; then
     copy_local_destination_overlay
   fi
-  if [[ $BOOTSTRAP -ne 1 ]]; then
-    [[ -d "$PREVIEW_DEST" ]] || die "base branch '$BASE' has no '$DEST_REL/' — use --bootstrap, or pass --base <branch>"
+  if [ $BOOTSTRAP -ne 1 ]; then
+    [ -d "$PREVIEW_DEST" ] || die "base branch '$BASE' has no '$DEST_REL/' — use --bootstrap, or pass --base <branch>"
   fi
 }
 
 prepare_apply_checkout() {
   git -C "$DEST_REPO" checkout -q "$BASE" 2>/dev/null || die "base branch '$BASE' doesn't exist in $FORK"
-  if [[ $BOOTSTRAP -ne 1 ]]; then
-    [[ -d "$DEST" ]] || die "base branch '$BASE' has no '$DEST_REL/' — use --bootstrap, or pass --base <branch>"
+  if [ $BOOTSTRAP -ne 1 ]; then
+    [ -d "$DEST" ] || die "base branch '$BASE' has no '$DEST_REL/' — use --bootstrap, or pass --base <branch>"
   fi
 }
 
 apply_to_preview_checkout() {
-  if [[ $BOOTSTRAP -eq 1 ]]; then
+  if [ $BOOTSTRAP -eq 1 ]; then
     mkdir -p "$PREVIEW_DEST"
   fi
 
@@ -301,13 +301,13 @@ apply_to_preview_checkout() {
 }
 
 preview_checkout_has_changes() {
-  [[ -n "$(git -C "$PREVIEW_REPO" status --porcelain "$DEST_REL")" ]]
+  [ -n "$(git -C "$PREVIEW_REPO" status --porcelain "$DEST_REL")" ]
 }
 
 prepare_preview_checkout
 
 TIMESTAMP="$(date -u +%Y%m%d-%H%M%S)"
-if [[ $BOOTSTRAP -eq 1 ]]; then
+if [ $BOOTSTRAP -eq 1 ]; then
   SYNC_BRANCH="bootstrap/superpowers-${UPSTREAM_SHORT}-${TIMESTAMP}"
 else
   SYNC_BRANCH="sync/superpowers-${UPSTREAM_SHORT}-${TIMESTAMP}"
@@ -328,7 +328,7 @@ copy_preserved_destination_metadata() {
   local path
   local rel
 
-  [[ -d "$destination/skills" ]] || return 0
+  [ -d "$destination/skills" ] || return 0
 
   while IFS= read -r -d '' path; do
     rel="${path#"$destination"/}"
@@ -340,7 +340,7 @@ copy_preserved_destination_metadata() {
 prepare_sync_source() {
   local destination="$1"
 
-  [[ -n "$CLEANUP_DIR" ]] || CLEANUP_DIR="$(mktemp -d)"
+  [ -n "$CLEANUP_DIR" ] || CLEANUP_DIR="$(mktemp -d)"
 
   SYNC_SOURCE="$CLEANUP_DIR/source-overlay"
   rm -rf "$SYNC_SOURCE"
@@ -362,7 +362,7 @@ echo "Version:  $UPSTREAM_VERSION"
 echo "Fork:     $FORK"
 echo "Base:     $BASE"
 echo "Branch:   $SYNC_BRANCH"
-if [[ $BOOTSTRAP -eq 1 ]]; then
+if [ $BOOTSTRAP -eq 1 ]; then
   echo "Mode:     BOOTSTRAP (creating plugins/superpowers/ when absent)"
 fi
 echo ""
@@ -371,7 +371,7 @@ rsync "${RSYNC_ARGS[@]}" --dry-run --itemize-changes "$SYNC_SOURCE/" "$PREVIEW_D
 echo "=== End preview ==="
 echo ""
 
-if [[ $DRY_RUN -eq 1 ]]; then
+if [ $DRY_RUN -eq 1 ]; then
   echo ""
   echo "Dry run only. Nothing was changed or pushed."
   exit 0
@@ -385,7 +385,7 @@ echo ""
 confirm "Apply changes, push branch, and open PR?" || { echo "Aborted."; exit 1; }
 
 echo ""
-if [[ -n "$LOCAL_CHECKOUT" ]]; then
+if [ -n "$LOCAL_CHECKOUT" ]; then
   if local_checkout_has_uncommitted_destination_changes; then
     die "local checkout has uncommitted changes under '$DEST_REL' — commit, stash, or discard them before syncing"
   fi
@@ -401,14 +401,14 @@ prepare_apply_checkout
 cd "$DEST_REPO"
 git checkout -q -b "$SYNC_BRANCH"
 echo "Syncing upstream content..."
-if [[ $BOOTSTRAP -eq 1 ]]; then
+if [ $BOOTSTRAP -eq 1 ]; then
   mkdir -p "$DEST"
 fi
 rsync "${RSYNC_ARGS[@]}" "$SYNC_SOURCE/" "$DEST/"
 
 # Bail early if nothing actually changed
 cd "$DEST_REPO"
-if [[ -z "$(git status --porcelain "$DEST_REL")" ]]; then
+if [ -z "$(git status --porcelain "$DEST_REL")" ]; then
   echo "No changes — embedded plugin was already in sync with upstream $UPSTREAM_SHORT (v$UPSTREAM_VERSION)."
   exit 0
 fi
@@ -419,7 +419,7 @@ fi
 
 git add "$DEST_REL"
 
-if [[ $BOOTSTRAP -eq 1 ]]; then
+if [ $BOOTSTRAP -eq 1 ]; then
   COMMIT_TITLE="bootstrap superpowers v$UPSTREAM_VERSION from upstream main @ $UPSTREAM_SHORT"
   PR_BODY="Initial bootstrap of the superpowers plugin from upstream \`main\` @ \`$UPSTREAM_SHORT\` (v$UPSTREAM_VERSION).
 

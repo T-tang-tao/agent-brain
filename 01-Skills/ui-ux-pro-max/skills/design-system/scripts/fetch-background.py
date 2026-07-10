@@ -120,7 +120,7 @@ def load_backgrounds_config():
         with open(BACKGROUNDS_CSV, newline='') as f:
             reader = csv.DictReader(f)
             for row in reader:
-                config[row['slide_type']] = row
+                config[row['slide_type'] = row
     except FileNotFoundError:
         print(f"Warning: {BACKGROUNDS_CSV} not found")
     return config

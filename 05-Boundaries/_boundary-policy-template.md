@@ -75,5 +75,5 @@ Agent 不允许执行的行为：
 
 ## 相关知识
 
-- [[../00-AgentBase/safety/01-Agent边界与限制]]
-- [[../00-AgentBase/02-概念全景辨析]]
+- [../00-AgentBase/safety/01-Agent边界与限制]
+- [../00-AgentBase/02-概念全景辨析]

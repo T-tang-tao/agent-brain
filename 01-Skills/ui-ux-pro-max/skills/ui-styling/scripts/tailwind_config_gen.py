@@ -119,7 +119,7 @@ class TailwindConfigGenerator:
             "950": f"var(--color-{name}-950)",
         }
 
-    def add_fonts(self, fonts: Dict[str, List[str]]) -> None:
+    def add_fonts(self, fonts: Dict[str, List[str]) -> None:
         """
         Add custom font families.
 
@@ -261,7 +261,7 @@ module.exports = {{
         indent = "  " * level
         lines = json_str.split("\n")
         # Skip first and last lines (braces)
-        indented = [indent + line for line in lines[1:-1]]
+        indented = [indent + line for line in lines[1:-1]
         return "\n".join(indented)
 
     def write_config(self) -> tuple[bool, str]:

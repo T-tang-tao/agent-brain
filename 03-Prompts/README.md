@@ -19,11 +19,11 @@
 
 概念解释见：
 
-- [[../00-AgentBase/02-概念全景辨析]]
+- [../00-AgentBase/02-概念全景辨析]
 
 ## 模板
 
-- [[_agent-prompt-template]]
+- [_agent-prompt-template]
 
 ## Prompt 资产应包含什么
 

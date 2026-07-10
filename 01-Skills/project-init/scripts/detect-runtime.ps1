@@ -49,7 +49,7 @@ $dirMap = [ordered]@{
 }
 foreach ($dir in $dirMap.Keys) {
     if (Test-Path ".\$dir") {
-        $dirSignals[$dirMap[$dir]] = ".\$dir"
+        $dirSignals[$dirMap[$dir] = ".\$dir"
     }
 }
 
@@ -63,7 +63,7 @@ $userMap = [ordered]@{
 }
 foreach ($path in $userMap.Keys) {
     if ($path -and (Test-Path $path)) {
-        $userSignals[$userMap[$path]] = $path
+        $userSignals[$userMap[$path] = $path
     }
 }
 

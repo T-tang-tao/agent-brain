@@ -218,7 +218,7 @@ def print_result(result: ValidationResult, verbose: bool = False):
             print(f"      [warn] {warning}")
 
 
-def print_summary(all_results: Dict[str, List[ValidationResult]]):
+def print_summary(all_results: Dict[str, List[ValidationResult]):
     """Print summary of all validation results."""
     total_files = 0
     total_passed = 0
@@ -293,7 +293,7 @@ Examples:
             print(f"  ... and {len(variables) - 30} more")
         return
 
-    all_results: Dict[str, List[ValidationResult]] = {}
+    all_results: Dict[str, List[ValidationResult] = {}
 
     # Validate specific files
     if args.files:

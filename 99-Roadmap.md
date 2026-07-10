@@ -340,3 +340,35 @@
   - 删除后 Test-Path D:\valut\agent\01-Skills\context-engineering 返回 False
   - 01-Skills/AGENTS.md、01-Skills/README.md 注册表行已移除(0 残留)
   - encoding(LF + 无 BOM)保持
+
+
+### 2026-07-10 — 链接格式硬规则([](path) 唯一允许)
+
+- **决策**:知识库所有跨文档引用统一使用标准 markdown 链接 ` [显示文字](相对路径.md) `,**禁止**以下三种格式
+- **背景**:根目录 README.md 大量使用 [path](裸括号无 URL)或 [[path]](Obsidian wikilink),在普通 markdown 渲染器中无法点击,违反"链接要有用"的基本要求
+- **禁止格式**:
+  - [[path]] Obsidian wikilink — 双层括号,纯 Obsidian 生态,其它渲染器(GitHub、VSCode、Cmd)不识别
+  - [path] 裸括号 — 单层括号无 URL,渲染为普通文本不可点击
+  - D:\valut\agent\... 绝对路径 — 换机器即失效
+- **推荐格式**:
+  - 显示文字 = 文件名(如  3-知识地图),不重复路径前缀
+  - URL = 相对当前文件的相对路径(如  0-AgentBase/03-知识地图.md)
+  - 完整样例:`[03-知识地图](00-AgentBase/03-知识地图.md)`
+- **执行**:
+  - 根 README.md:17 个链接全部转成标准格式
+  -  0-AgentBase/AGENTS.md § 3.1 加第 7 条核心原则
+  -  1-Skills/agents-md-author/SKILL.md v2.0.0 → v2.1.0,规则 6 加链接格式硬规则
+- **影响**:所有未来入库文档自动遵循;Obsidian 仍可渲染(标准 markdown 链接兼容)
+
+---
+
+## 敏感操作审计(续)
+
+### 2026-07-10 — 根 README.md 全量链接格式修正
+
+- **动作类型**:SearchReplace(17 处)
+- **影响范围**:D:\valut\agent\README.md(8 项阅读顺序 + 2 项 Agent 说明 + 7 项快速开始)
+- **原格式**:[00-AgentBase/03-知识地图](裸括号)或 [[path]](wikilink)
+- **新格式**:`[03-知识地图](00-AgentBase/03-知识地图.md)`(标准 markdown,显示文字 = 文件名,URL = 相对路径)
+- **可回滚**:git revert(本任务未用 git,需手动重写)
+- **已验证**:0 个 [text] 残留,17 个有效 [text](url) 链接,无 BOM / LF only

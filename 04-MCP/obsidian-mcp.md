@@ -15,7 +15,7 @@ Obsidian MCP 让 Agent 能:
 - 读 vault 笔记(`${KB_ROOT}/*.md`)
 - 写 vault 笔记
 - 创建/删除/重命名笔记
-- 解析 Obsidian 链接(`[[..]]`)和 frontmatter
+- 解析 Obsidian 链接(`[..]`)和 frontmatter
 - 搜索 vault 内容
 
 适用场景:
@@ -74,7 +74,7 @@ args = ["-y", "obsidian-mcp-server", "--vault-path", "D:\\valut\\trade\\agent"]
 | `search_notes` | 全文搜索 |
 | `get_note_metadata` | 读 frontmatter |
 | `update_note_metadata` | 改 frontmatter |
-| `resolve_links` | 解析 `[[link]]` |
+| `resolve_links` | 解析 `[link]` |
 
 ## 风险边界
 

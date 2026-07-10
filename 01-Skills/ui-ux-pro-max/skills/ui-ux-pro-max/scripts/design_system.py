@@ -252,7 +252,7 @@ class DesignSystemGenerator:
         if motion_info:
             motion_result = search(f"{query} {motion_info['tier']}", "gsap", 5)
             motion_matches = motion_result.get("results", [])
-            tiered = [m for m in motion_matches if m.get("Intensity Tier") == motion_info["tier"]]
+            tiered = [m for m in motion_matches if m.get("Intensity Tier") == motion_info["tier"]
             if tiered:
                 motion_snippet = tiered[0]
             elif motion_matches:
@@ -347,7 +347,7 @@ def hex_to_ansi(hex_color: str) -> str:
 def ansi_ljust(s: str, width: int) -> str:
     """Like str.ljust but accounts for zero-width ANSI escape sequences."""
     import re
-    visible_len = len(re.sub(r'\033\[[0-9;]*m', '', s))
+    visible_len = len(re.sub(r'\033\[0-9;]*m', '', s))
     pad = width - visible_len
     return s + (" " * max(0, pad))
 

@@ -176,7 +176,7 @@ Agent 完成任务后不能只说“应该可以”。
 
 ## 相关文件
 
-- [[../01-AgentBase总览]]
-- [[../runtime/01-Agent运行时与CLI]]
-- [[../02-概念全景辨析]]
-- [[../knowledge/01-Agent知识库设计]]
+- [../01-AgentBase总览]
+- [../runtime/01-Agent运行时与CLI]
+- [../02-概念全景辨析]
+- [../knowledge/01-Agent知识库设计]

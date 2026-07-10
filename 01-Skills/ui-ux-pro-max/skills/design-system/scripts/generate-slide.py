@@ -534,7 +534,7 @@ def generate_metrics_slide(data):
             <div class="metric-value">{_e(m.get('value', ''))}</div>
             <div class="metric-label">{_e(m.get('label', ''))}</div>
         </div>
-    ''' for m in metrics[:4]])
+    ''' for m in metrics[:4])
 
     return f'''
     <section class="slide slide--surface slide--glow">

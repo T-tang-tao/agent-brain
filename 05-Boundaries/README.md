@@ -19,11 +19,11 @@
 
 概念解释见：
 
-- [[../00-AgentBase/safety/01-Agent边界与限制]]
+- [../00-AgentBase/safety/01-Agent边界与限制]
 
 ## 模板
 
-- [[_boundary-policy-template]]
+- [_boundary-policy-template]
 
 ## 边界规则应包含什么
 
