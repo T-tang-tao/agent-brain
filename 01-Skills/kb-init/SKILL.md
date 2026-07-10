@@ -136,7 +136,7 @@ version: 1.0.0
 - **`.agent/` 在项目根**(统一目录名,跨 Runtime 一致)
 - **知识库目录**(00-XX/)是知识层的物理体现,与 `.agent/` 平级
 
-**完整规范**:[../00-AgentBase/runtime/00-项目级配置]
+**完整规范**:[00-项目级配置](../00-AgentBase/runtime/00-项目级配置.md)
 
 **为什么**:换 Runtime(Claude Code / Codex / Hermes)不需要改目录结构;团队成员各用各的 Runtime 但项目结构一致;部署脚本可复用。
 

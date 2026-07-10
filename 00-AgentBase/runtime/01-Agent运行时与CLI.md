@@ -124,9 +124,9 @@ Agent CLI = Model + Toolset + Filesystem Access + Shell + Context Manager + Perm
 
 ## 相关文件
 
-- [../01-AgentBase总览]
-- [../02-概念全景辨析]
-- [../03-知识地图]
-- [../safety/01-Agent边界与限制]
+- [01-AgentBase总览](../01-AgentBase总览.md)
+- [02-概念全景辨析](../02-概念全景辨析.md)
+- [03-知识地图](../03-知识地图.md)
+- [01-Agent边界与限制](../safety/01-Agent边界与限制.md)
 - [Hermes Agent 专题](./02-Hermes-Agent/01-概述.md) — Hermes Agent 完整认知
 - [Claude Code 专题](./03-ClaudeCode/README.md) — Claude Code 完整认知

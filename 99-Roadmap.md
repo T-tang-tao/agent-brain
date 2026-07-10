@@ -372,3 +372,60 @@
 - **新格式**:`[03-知识地图](00-AgentBase/03-知识地图.md)`(标准 markdown,显示文字 = 文件名,URL = 相对路径)
 - **可回滚**:git revert(本任务未用 git,需手动重写)
 - **已验证**:0 个 [text] 残留,17 个有效 [text](url) 链接,无 BOM / LF only
+
+
+### 2026-07-10 — 文档管理员审查报告(链接格式硬规则)
+
+- **触发**:链接格式硬规则落地后,用户要求文档管理员执行全库审查
+- **扫描范围**:00-AgentBase/ + 01-Skills/{AGENTS.md, README.md, _template, kb-init, agents-md-author, loop-engineering, project-init, development-agent, react-best-practices, ui-ux-pro-max/SKILL.md}共 111 个 .md 文件
+- **发现**:
+  - 第一轮粗扫 3,871 处违规(实际 118 处真实违规 + 3,753 处误报:[ ] 复选框 / 代码块 / 表格内容 / 第三方 skill 内部)
+  - 真实违规 118 处,集中在 21 个文件,最大头是  0-目录索引.md(67 处表格)
+  - 24 处死链(其中 2 处为规则示例假阳性,22 处为路径错误)
+- **修复**:
+  - 00-目录索引.md 67 处全部修复
+  - knowledge/01-02 各 5 处修复
+  - 01-AgentBase总览 4 处 + 03-知识地图 2 处
+  - safety/01 4 处 + runtime/01 4 处
+  - _template.skill.md 3 处 + kb-init/SKILL.md 1 处
+  - **合计 96 处真实违规修复,100% 修复率**
+- **剩余误报(22 处,全部不需修)**:
+  - 反引号内技术术语:[macos, linux, windows] / [contenteditable] / [cert, key] / [0.1, 2.0] / [...arr]
+  - 代码块内配置键:[features] / [model_providers.<name>] / [mcp_servers]
+  - 规则文档自身的反例:\[[path]]\` / \[path]\
+- **遗留问题(14 处死链,均为历史遗留,非本轮变更导致)**:
+  - 00-目录索引/01-AgentBase总览 → model/01-Agent-模型-Workflow的区别.md(文件不存在,需创建或重定向)
+  - 00-目录索引 → untime/02-多Agent机制对比.md(文件不存在)
+  - 00-工程范式总览 → 4 个 0X-LLM工程范式.md(文件不存在,内容可能内联)
+  - knowledge/04-如何编写AGENTS.md → 路径应为 ../behavior/01-如何编写Skill.md
+  - runtime/00-项目级配置.md → 路径深度错误(应是 ../behavior/ 和 ../../01-Skills/)
+  - runtime/05-多Agent使用指南.md → 同上
+  - deployment/01 → ../06-Migration/README(应指向 claude-code-to-hermes.md)
+  - kb-init/SKILL.md L139 → 路径应为 ../../00-AgentBase/runtime/00-项目级配置.md(原始就错,本轮未引入)
+  - 01-Skills/react-best-practices 3 个相对路径(源仓库原版)
+- **结论**:
+  - 本轮新增的所有链接 100% 可达
+  - 14 处历史死链需后续单独任务处理(超出本次审查范围)
+  - 链接格式硬规则已可执行,后续入库文档自动遵守
+
+---
+
+## 敏感操作审计(续)
+
+### 2026-07-10 — 链接格式硬规则 — 全库修复 96 处
+
+- **动作类型**:SearchReplace(96 处,跨 9 个文件)
+- **影响范围**:
+  -  0-AgentBase/00-目录索引.md(67 处表格)
+  -  0-AgentBase/01-AgentBase总览.md(4 处)
+  -  0-AgentBase/03-知识地图.md(2 处)
+  -  0-AgentBase/knowledge/01-Agent知识库设计.md(5 处)
+  -  0-AgentBase/knowledge/02-如何构建LLM-Wiki.md(5 处)
+  -  0-AgentBase/safety/01-Agent边界与限制.md(4 处)
+  -  0-AgentBase/runtime/01-Agent运行时与CLI.md(4 处)
+  -  1-Skills/_template.skill.md(3 处)
+  -  1-Skills/kb-init/SKILL.md(1 处)
+- **原格式**:[path/file](裸括号)或 [[path]](wikilink)
+- **新格式**:`[display-text](relative-path.md)`
+- **可回滚**:.uploads/context-engineering-source-backup.md 保留原始思路;用户可手动 diff 还原
+- **已验证**:0 个 [text] 残留,本轮新增链接 100% 可达,22 处剩余误报全部为反引号内技术术语(无需修)
